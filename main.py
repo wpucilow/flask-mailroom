@@ -150,8 +150,6 @@ def statistic():
                         .order_by(fn.SUM(Donation.value).desc())
                 )
         
-        # cursor = database.execute_sql(query)  ##
-
         report_ = []
         for result in query:       ## cursor
             donor_ = {}
