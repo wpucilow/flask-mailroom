@@ -130,11 +130,11 @@ def add_donation():
         
 @app.route('/stats/')
 def statistic():
-    database = connect(os.environ.get('DATABASE_URL', 'sqlite:///my_database.db'))
+    # database = connect(os.environ.get('DATABASE_URL', 'sqlite:///my_database.db'))
     # database = SqliteDatabase('my_database.db')
     
     try:
-        database.connect()
+        # database.connect()
         # database.execute_sql('PRAGMA foreign_keys = ON;')
         
         query = (Donor
@@ -161,7 +161,8 @@ def statistic():
     except Exception as e:
             print(e)
     finally:
-        database.close()
+        # database.close()
+        pass
 
     return render_template('stats.jinja2', report=report_)               
 
