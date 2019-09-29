@@ -135,7 +135,8 @@ def statistic():
     
     try:
         database.connect()
-        database.execute_sql('PRAGMA foreign_keys = ON;')
+        # database.execute_sql('PRAGMA foreign_keys = ON;')
+        database.execute_sql()
         query = (Donor
                         .select(Donor.name.alias('name'),
                                 fn.COUNT(Donation.donor_id).alias('num'),
