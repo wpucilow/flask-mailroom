@@ -81,12 +81,15 @@ def delete_donor():
                 donor = Donor.select().where(Donor.name == name).get()
                 # query = Note.delete().where(Note.id > 3)
                 # n = query.execute()
+
                 query1 = Donation.delete().where(Donation.donor_id == donor.id)
                 query2 = Donor.delete().where(Donor.name == donor.name)
                 m = query1.execute()
                 n = query2.execute()
             except Donor.DoesNotExist:          # no donor in db
-                return render_template('delete.jinja2', error="Donor not found.", not_found=name)  
+                return render_template('delete.jinja2', error="Donor not found.", not_found=name) 
+            except psycopg2.errors.InFailedSqlTransaction:
+                return render_template('delete.jinja2', error="Heroku - psycopg2.errors.InFailedSqlTransaction") 
             return redirect(url_for('all_donors'))
     else:
         return render_template('delete.jinja2')
