@@ -56,7 +56,7 @@ def new_donor():
                 donor.save()
             except peewee.IntegrityError:
                 return render_template('new.jinja2', error=f"Donor {name} already in Database")
-            except psycopg2.errors.UniqueViolation
+            except psycopg2.errors.UniqueViolation:
                 return render_template('new.jinja2', error=f"Donor {name} already in Database")
             else:
                 return redirect(url_for('all_donors'))
