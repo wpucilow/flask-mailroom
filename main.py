@@ -7,6 +7,7 @@ from passlib.hash import pbkdf2_sha256
 from playhouse.db_url import connect
 from peewee import *
 import peewee
+import psycopg2 # for heroku
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY').encode()
@@ -54,6 +55,8 @@ def new_donor():
                 donor = Donor(name=name)
                 donor.save()
             except peewee.IntegrityError:
+                return render_template('new.jinja2', error=f"Donor {name} already in Database")
+            except psycopg2.errors.UniqueViolation
                 return render_template('new.jinja2', error=f"Donor {name} already in Database")
             else:
                 return redirect(url_for('all_donors'))
