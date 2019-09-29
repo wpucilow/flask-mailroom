@@ -135,7 +135,7 @@ def statistic():
     
     try:
         database.connect()
-        # database.execute_sql('PRAGMA foreign_keys = ON;')  ##
+        # database.execute_sql('PRAGMA foreign_keys = ON;')
         
         query = (Donor
                         .select(Donor.name.alias('name'),
@@ -150,10 +150,10 @@ def statistic():
                         .order_by(fn.SUM(Donation.value).desc())
                 )
         
-        cursor = database.execute_sql(query)  ##
+        # cursor = database.execute_sql(query)  ##
 
         report_ = []
-        for result in cursor:       ## query
+        for result in query:       ## cursor
             donor_ = {}
             donor_['name'] = result.name,
             donor_['number'] = result.num if result.num else 0
