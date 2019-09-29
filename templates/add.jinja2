@@ -1,0 +1,11 @@
+{% extends 'base.jinja2' %}
+
+{% block subtitle %}Choose Donor{% endblock subtitle %}
+
+{% block content %}
+<form method="GET">
+    {% if error %}<span class="error">{{ not_found }}: {{ error }}<br>{% endif %}
+    <label for="donor">Donor:</label><input type="text" id="donor" name="donor"><br>
+    <input type="submit" value="Get Donor">
+</form>
+{% endblock content %}
